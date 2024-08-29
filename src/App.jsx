@@ -58,6 +58,25 @@ function App() {
     setInputLink((inputLink) => e.target.value);
   };
 
+  //Handling Delete
+  const handleDelete = (e) =>{
+    const id = e.target.value;
+    console.log(id)
+    fetch(`${api}/${id}`,{
+      method:'DELETE'
+    })
+     .then(res=>{
+      res.json();
+      if(res.ok){
+        console.log("Website Deleted Successfully");
+        setload(load=>load+1);
+      }
+     })
+     .then(data=>console.log(data))
+     .catch(error=>console.log(error))
+
+  }
+
   return (
     <div className="container-fluid">
       <h1 className="text-center text-warning">
@@ -115,13 +134,13 @@ function App() {
         <ol>
           {cool.map((data) => (
             <li key={data._id} style={{ marginTop: "12px" }}>
-              <div style={{ display: "inline-block" }}>
+              <div>
                 <div
-                  className="card"
                   style={{ background: "none", marginTop: 5, border: "none" }}
                 >
                   <h3>{data.name}</h3>
                   <>{data.use}</>
+                  <br/>
                   <a
                     href={data.link}
                     target="_blank"
@@ -132,8 +151,11 @@ function App() {
                   >
                     Visit Website
                   </a>
+                  <br/><br/>
+                  <button value={data._id} onClick={handleDelete} className="btn btn-danger">Remove</button>
                 </div>
               </div>
+              <br/>
             </li>
           ))}
         </ol>
