@@ -12,6 +12,12 @@ function App() {
 
   const api = import.meta.env.VITE_REACT_API_COOL;
 
+  const clearform = () =>{
+    setInputName(inputName=>"");
+    setInputLink(inputLink=>"");
+    setInputUse(inputUse=>"");
+  }
+
   useEffect(() => {
     fetch(api)
       .then((res) => res.json())
@@ -40,6 +46,7 @@ function App() {
         if (res.ok) {
           console.log("Data submited Successfully!");
           setload((load) => load + 1);
+          clearform()
         }
       })
       .then((data) => console.log(data))
