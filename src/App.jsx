@@ -138,6 +138,8 @@ function App() {
           ))}
         </ol>
       </div>
+      <hr/>
+      <p>&copy;2024 Rojo's Ltd | All Rights Are Reserved</p>
     </div>
   );
 }
